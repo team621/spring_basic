@@ -5,12 +5,20 @@ import hello.core.member.Member;
 import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemberServie;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class OrderServiceTest {
 
-    MemberServie memberServie = new MemberServiceImpl();
-    OrderService orderService = new OrderServiceImpl();
+    MemberServie memberServie;
+    OrderService orderService;
+
+    @BeforeEach
+    public void beforeEach(){
+        AppConfig appConfig = new AppConfig();
+        memberServie = appConfig.memberServie();
+        orderService = appConfig.orderService();
+    }
 
     @Test
     void createOrder(){
