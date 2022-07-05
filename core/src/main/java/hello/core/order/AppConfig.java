@@ -6,22 +6,30 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemberServie;
 import hello.core.member.MemoryMemberRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class AppConfig {
+//@Bean > 스프링 컨테이너에 등록됨
 
-    public MemberServie memberServie(){
+    @Bean
+    public MemberServie memberService(){
         return new MemberServiceImpl(memberRepository());
     }
 
+    @Bean
     public OrderService orderService(){
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
-    private MemoryMemberRepository memberRepository() {
+    @Bean
+    public MemoryMemberRepository memberRepository(){
         return new MemoryMemberRepository();
     }
 
-    private DiscountPolicy discountPolicy() {
+    @Bean
+    public DiscountPolicy discountPolicy() {
         //return new FixDiscountPoilcy();
         return new RateDiscountPolicy();
     }
